@@ -42,10 +42,10 @@ using namespace robotis_op;
 const int BAUD_RATE = 2000000;
 const double PROTOCOL_VERSION = 2.0;
 const int SUB_CONTROLLER_ID = 200;
-const int DXL_BROADCAST_ID = 254;
+const int DXL_BROADCAST_ID = 254; // Protocol which makes all connected devices execute the Instruction Packet. 
 const int DEFAULT_DXL_ID = 1;
 const std::string SUB_CONTROLLER_DEVICE = "/dev/ttyUSB0";
-const int POWER_CTRL_TABLE = 24;
+const int POWER_CTRL_TABLE = 24; // Protocol Torque Enable
 const int RGB_LED_CTRL_TABLE = 26;
 const int TORQUE_ON_CTRL_TABLE = 64;
 
@@ -180,7 +180,7 @@ int main(int argc, char **argv)
 
     while (torque_on_count < 5)
     {
-      int _return = packet_handler->write1ByteTxRx(port_handler, SUB_CONTROLLER_ID, POWER_CTRL_TABLE, 1);
+      int _return = packet_handler->write1ByteTxRx(port_handler, SUB_CONTROLLER_ID, POWER_CTRL_TABLE, 1);// SDK Transmits and receives 1 byte packet
 
       if(_return != 0)
         ROS_ERROR("Torque on DXLs! [%s]", packet_handler->getRxPacketError(_return));
